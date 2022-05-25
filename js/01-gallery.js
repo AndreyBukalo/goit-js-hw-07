@@ -1,11 +1,8 @@
-import { galleryItems } from './gallery-items.js';
+import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 const gallery = document.querySelector(".gallery");
 
-gallery.addEventListener("click", onZoomImg); 
-
-
-
+gallery.addEventListener("click", onZoomImg);
 
 const galleryMarkup = galleryItems
   .map(
@@ -22,38 +19,29 @@ const galleryMarkup = galleryItems
   </div>`
   )
   .join("");
-  
-gallery.innerHTML = galleryMarkup; 
+
+gallery.innerHTML = galleryMarkup;
 
 function onZoomImg(event) {
   event.preventDefault();
+
   if (!event.target.classList.contains("gallery__image")) {
     return;
-  }
+  }   console.log("This is image");
   toggleGalleryModal();
- 
-  };
- 
+}
+
 function toggleGalleryModal() {
   const source = event.target.dataset.source;
   const instance = basicLightbox.create(`
     <img src="${source}"width="800" height="600">`);
   instance.show();
-  gallery.addEventListener("keydown", (event) => {
+  document.addEventListener("keydown", closeOnEsc);
+  function closeOnEsc() {
     if (event.key === "Escape") {
       instance.close();
+     document.removeEventListener("keydown", closeOnEsc);
     }
-    gallery.removeEventListener("keydown", event);
     console.log("key: ", event.key);
-    console.log("code: ", event.code);
-  });
-};
-
-
-
-
-
-
-
-
-
+  }
+}
