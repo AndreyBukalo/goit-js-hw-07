@@ -2,8 +2,6 @@ import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 const gallery = document.querySelector(".gallery");
 
-gallery.addEventListener("click", onZoomImg);
-
 const galleryMarkup = galleryItems
   .map(
     ({ preview, original, description }) =>
@@ -23,18 +21,10 @@ const galleryMarkup = galleryItems
 
 gallery.innerHTML = galleryMarkup;
 
-function onZoomImg(event) {
-  event.preventDefault();
 
-  if (!event.target.classList.contains("gallery__image")) {
-    return;
-  }
-  toggleGalleryModal();
-}
 
-function toggleGalleryModal() {
-  var lightbox = new SimpleLightbox(".gallery a", {
+ const lightbox = new SimpleLightbox(".gallery a", {
     captionsData: "alt",
     captionDelay: "250",
   });
-}
+
