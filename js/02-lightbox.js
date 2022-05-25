@@ -1,4 +1,4 @@
-import { galleryItems } from './gallery-items.js';
+import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 const gallery = document.querySelector(".gallery");
 
@@ -7,7 +7,7 @@ gallery.addEventListener("click", onZoomImg);
 const galleryMarkup = galleryItems
   .map(
     ({ preview, original, description }) =>
-      `
+      `<div class="gallery">
     <a class="gallery__item" href="${original}">
       <img
         class="gallery__image"
@@ -16,28 +16,25 @@ const galleryMarkup = galleryItems
         alt="${description}"
       />
     </a>
-
+  </div>
  `
   )
   .join("");
 
 gallery.innerHTML = galleryMarkup;
-console.log(galleryItems);
+
 function onZoomImg(event) {
   event.preventDefault();
 
   if (!event.target.classList.contains("gallery__image")) {
-      return;
-      
-  }   console.log("This is image");
-toggleGalleryModal();
+    return;
+  }
+  toggleGalleryModal();
 }
-
 
 function toggleGalleryModal() {
-new SimpleLightbox(".gallery__item a", {
-  href,
-});
+  var lightbox = new SimpleLightbox(".gallery a", {
+    captionsData: "alt",
+    captionDelay: "250",
+  });
 }
-  
-
